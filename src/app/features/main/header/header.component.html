@@ -1,0 +1,17 @@
+<header class="bg-white border-b border-gray-100">
+  <nav class="mx-auto flex h-16 items-center justify-between px-6 lg:px-8" aria-label="Global">
+    <div class="flex">
+      <span class="text-xl font-bold text-gray-800">{{ typeMenu }}</span>
+    </div>
+    <div class="flex flex-1 justify-end">
+      <ul
+        class="px-4 py-1"
+        *ngFor="let item of menuItems"
+      >
+        <li>
+          <app-menu-item [name]="item" [typeMenu]="typeMenu"></app-menu-item>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

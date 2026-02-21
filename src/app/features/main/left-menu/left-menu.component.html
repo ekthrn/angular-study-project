@@ -1,0 +1,15 @@
+<aside class="flex flex-col w-64 h-screen border-r border-gray-200 bg-white">
+  <div class="flex h-16 items-center px-6">
+    <span class="text-xl font-bold text-gray-800">{{ typeMenu }}</span>
+  </div>
+  <nav class="flex-1 overflow-y-auto">
+    <ul role="list"
+        class="px-4 py-1"
+        *ngFor="let item of menuItems"
+    >
+      <li>
+        <app-menu-item [name]="item" [typeMenu]="typeMenu"></app-menu-item>
+      </li>
+    </ul>
+  </nav>
+</aside>
