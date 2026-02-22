@@ -1,3 +1,4 @@
+  
 # Домашка №2
 
 Созданы 4 компоненты (left-menu, header, main-content-panel, menu-item):
