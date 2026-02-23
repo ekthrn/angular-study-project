@@ -1,0 +1,58 @@
+import {Book} from "@models/book.model";
+
+export const MOCK_BOOKS: Book[] = [
+  {
+    id: 1,
+    title: "Грозовой перевал",
+    author: "Эмили Бронте",
+    year: 1847,
+    genre: ["Роман"],
+    rating: 4.1,
+    coverUrl: "https://upload.wikimedia.org/wikipedia/ru/1/15/%D0%93%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%2C_2026%29.jpg",
+  },
+  {
+    id: 2,
+    title: "Повелитель мух",
+    author: "Уильям Голдинг",
+    year: 1954,
+    genre: ["Роман", "Антиутопия"],
+    rating: 4.8,
+    coverUrl: "https://old.prodalit.ru/images/95000/94651.jpg",
+  },
+  {
+    id: 2,
+    title: "Повелитель мух",
+    author: "Уильям Голдинг",
+    year: 1954,
+    genre: ["Роман", "Антиутопия"],
+    rating: 4.8,
+    coverUrl: "https://upload.wikimedia.org/wikipedia/ru/1/15/%D0%93%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%2C_2026%29.jpg",
+  },
+  {
+    id: 3,
+    title: "Повелитель мух",
+    author: "Уильям Голдинг",
+    year: 1954,
+    genre: ["Роман", "Антиутопия"],
+    rating: 4.8,
+    coverUrl: "https://upload.wikimedia.org/wikipedia/ru/1/15/%D0%93%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%2C_2026%29.jpg",
+  },
+  {
+    id: 4,
+    title: "Повелитель мух",
+    author: "Уильям Голдинг",
+    year: 1954,
+    genre: ["Роман", "Антиутопия"],
+    rating: 4.8,
+    coverUrl: "https://upload.wikimedia.org/wikipedia/ru/1/15/%D0%93%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%2C_2026%29.jpg",
+  },
+  {
+    id: 5,
+    title: "Повелитель мух",
+    author: "Уильям Голдинг",
+    year: 1954,
+    genre: ["Роман", "Антиутопия"],
+    rating: 4.8,
+    coverUrl: "https://upload.wikimedia.org/wikipedia/ru/1/15/%D0%93%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%2C_2026%29.jpg",
+  },
+];
