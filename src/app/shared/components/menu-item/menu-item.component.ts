@@ -17,6 +17,6 @@ export class MenuItemComponent {
   ) {}
 
   public send(item: string) {
-    this.filterService.setItem(item);
+    this.filterService.setMenuItem(item);
   }
 }
