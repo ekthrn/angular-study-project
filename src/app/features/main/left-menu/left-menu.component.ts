@@ -18,8 +18,9 @@ export class LeftMenuComponent {
     ...new Set(MOCK_BOOKS.filter(el => !!el).flatMap(el => el.genre))
   ];
   public typeMenu: string = 'Категории';
+  public isHide: boolean = false;
 
-  public trackByFn(index: number, item: string): string {
+  public trackByMenu(index: number, item: string): string {
     return item;
   }
 }
