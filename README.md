@@ -1,8 +1,16 @@
   
-# Домашка №1
+# Домашка №2
 
-Созданы 4 компоненты (left-menu, header, main-content-panel, menu-item):
-![](./public/main-page.png)
+1. Для хранения набора данных создан mock-file: /src/app/mock-data/books.mock.ts. Данные типизированы (type Book в models)
 
-При нажатии на кнопки(menu-item) из left-menu или header появляется alert:
-![](./public/alert.png)
+2. Для отображения данных созданы компоненты: data-card, data-list.
+   data-card - компонент для отрисовки детальной карточки книги;
+![](./public/card.png)
+   data-list - компонент для отрисовки списка карточек и панели для сортировки карточек;
+![](./public/main-page-2.png)
+
+3. и 4. Для сортировки по параметрам создан компонент setting-panel. Содержит внутри себя опции сортировки (для них создан type Option в models), которые добавляются из класса
+![](./public/setting-panel.png)
+
+5. Меню категорий реализовано как компонента left-menu (при необходимости можно подключить несколько меню)
+![](./public/filter-menu.png)
