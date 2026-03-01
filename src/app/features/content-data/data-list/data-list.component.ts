@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 
-import { combineLatest } from 'rxjs';
-
 import {MenuFilterService} from "@services/menu-filter.service";
 
 import {SettingPanelComponent} from '@features/content-data/setting-panel/setting-panel.component';
@@ -21,7 +19,7 @@ import {MOCK_BOOKS} from "@mock-data/books.mock";
   templateUrl: './data-list.component.html',
   styleUrl: './data-list.component.scss'
 })
-export class BooksListComponent {
+export class BooksListComponent implements OnInit {
   public books: Book[] = [];
 
   constructor(
