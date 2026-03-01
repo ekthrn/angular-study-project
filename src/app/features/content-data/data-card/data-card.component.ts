@@ -1,5 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild,
+        ViewContainerRef, ComponentRef} from '@angular/core';
 import {NgIf} from '@angular/common';
+
+import {BookDetailsDialogComponent} from '@features/content-data/book-details-dialog/book-details-dialog.component';
 
 import {Book} from "@models/book.model";
 
@@ -13,4 +16,24 @@ import {Book} from "@models/book.model";
 })
 export class BookCardComponent {
   @Input() book?: Book;
+
+  @ViewChild('dialogContainer', { read: ViewContainerRef }) dialogContainer!: ViewContainerRef;
+
+  dialogComponentRef!: ComponentRef<BookDetailsDialogComponent>;
+
+  createDialogComponent(book: Book){
+    this.dialogComponentRef = this.dialogContainer.createComponent(BookDetailsDialogComponent);
+    this.dialogComponentRef.instance.book = book;
+
+    this.dialogComponentRef.instance.closeEvent.subscribe((isDelete: boolean) => {
+      if (isDelete) {
+        this.deleteDialogComponent();
+      }
+    });
+  }
+
+  deleteDialogComponent(){
+    this.dialogContainer.clear();
+    this.dialogComponentRef.destroy();
+  }
 }

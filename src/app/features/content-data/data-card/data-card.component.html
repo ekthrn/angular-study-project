@@ -1,5 +1,7 @@
 <div *ngIf="book as b; else divNone"
-     class="flex flex-row h-80 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-200 overflow-hidden">
+     role="button"
+     class="flex flex-row h-80 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-200 overflow-hidden"
+     (click)="createDialogComponent(b)">
 
   <div class="relative w-32 sm:w-90 bg-slate-100 flex items-center justify-center shrink-0 border-r border-slate-100">
     <img *ngIf="b.coverUrl; else noImg"
@@ -25,7 +27,6 @@
       <p class="text-sm text-slate-600 text-justify"><span class="font-bold text-slate-600">Описание:</span> {{b.info}}</p>
     </div>
   </div>
-
 </div>
 
 <ng-template #divNone>
@@ -33,3 +34,6 @@
     <p class="text-sm text-slate-800">Нет данных</p>
   </div>
 </ng-template>
+
+<ng-container #dialogContainer>
+</ng-container>
