@@ -16,9 +16,13 @@
       <ng-template #noImg>
         <span class="text-slate-400 text-[10px] text-center">Нет обложки</span>
       </ng-template>
-      <div class="absolute top-1 left-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm text-[13px] font-bold text-amber-700">
-        ★ {{b.rating}}
-      </div>
+
+      <ng-container *appIfHighRating="b.rating">
+        <div class="absolute top-1 left-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm text-[13px] font-bold text-amber-700">
+          ★ {{b.rating}}
+        </div>
+      </ng-container>
+
     </div>
 
     <div class="p-4 flex flex-col flex-grow min-w-0">

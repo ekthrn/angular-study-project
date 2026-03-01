@@ -4,13 +4,15 @@ import {NgIf, NgTemplateOutlet} from '@angular/common';
 
 import {BookDetailsDialogComponent} from '@features/content-data/book-details-dialog/book-details-dialog.component';
 
+import {IfHighRatingDirective} from "@directives/if-high-rating.directive";
 import {Book} from "@models/book.model";
 
 @Component({
   selector: 'app-data-card',
   imports: [
     NgIf,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    IfHighRatingDirective
   ],
   templateUrl: './data-card.component.html',
   styleUrl: './data-card.component.scss'
