@@ -1,0 +1,49 @@
+<ng-container
+  *ngTemplateOutlet="book ? bookCard : emptyState">
+</ng-container>
+
+<ng-template #bookCard>
+  <div *ngIf="book as b"
+       role="button"
+       class="flex flex-row h-80 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-200 overflow-hidden"
+       (click)="createDialogComponent(b)">
+
+    <div class="relative w-32 sm:w-90 bg-slate-100 flex items-center justify-center shrink-0 border-r border-slate-100">
+      <img *ngIf="b.coverUrl; else noImg"
+           [src]="b.coverUrl"
+           [alt]="b.title"
+           class="h-full w-full object-contain">
+      <ng-template #noImg>
+        <span class="text-slate-400 text-[10px] text-center">Нет обложки</span>
+      </ng-template>
+
+      <ng-container *appIfHighRating="b.rating">
+        <div class="absolute top-1 left-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm text-[13px] font-bold text-amber-700">
+          ★ {{b.rating}}
+        </div>
+      </ng-container>
+
+    </div>
+
+    <div class="p-4 flex flex-col flex-grow min-w-0">
+      <div class="text-2xl font-bold text-slate-700 truncate mb-1 leading-tight hover:text-rose-800" [title]="b.title">
+        {{b.title}}
+      </div>
+      <p class="font-medium text-s text-slate-600 mb-3 truncate">{{b.author}}</p>
+      <div class="space-y-1 mt-2">
+        <p class="text-sm text-slate-600"><span class="font-bold text-slate-600">Жанр:</span> {{b.genre}}</p>
+        <p class="text-sm text-slate-600"><span class="font-bold text-slate-600">Год издания:</span> {{b.year}}</p>
+        <p class="text-sm text-slate-600 text-justify"><span class="font-bold text-slate-600">Краткое описание:</span> {{getBriefInfo(b.info)}}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #emptyState>
+  <div class="h-48 flex flex-col items-center justify-center p-6 bg-slate-50 rounded-lg border-2 border-dashed border-slate-200">
+    <p class="text-sm text-slate-800">Нет данных!</p>
+  </div>
+</ng-template>
+
+<ng-container #dialogContainer>
+</ng-container>

@@ -1,8 +1,10 @@
   
-# Домашка №2
+# Домашка №3
 
-Созданы 4 компоненты (left-menu, header, main-content-panel, menu-item):
-![](./public/main-page.png)
+1. Для отображения описания книги создан компонент book-details-dialog
+   ![](./public/dialog.png)
+2. Добавлено пустое состояние для data-card и data-list (emptyState), созданы базовые layout в шаблонах data-card и data-list для карточки
 
-При нажатии на кнопки(menu-item) из left-menu или header появляется alert:
-![](./public/alert.png)
+3. Создана директива appIfHighRating для отоюоажения карточек с высоким рейтингом (больше 4.0)
+   ![](./public/directive-for-high-rating.png)
+

@@ -1,0 +1,22 @@
+<div class="container mx-auto p-6">
+  <app-setting-panel></app-setting-panel>
+
+  <ng-container
+    *ngTemplateOutlet="books.length ? cardTemplate : emptyState">
+  </ng-container>
+
+  <ng-template #cardTemplate>
+    <div class="grid grid-cols-1 gap-4">
+      <app-data-card
+        *ngFor="let item of books; trackBy: trackByCard"
+        [book]="item">
+      </app-data-card>
+    </div>
+  </ng-template>
+
+  <ng-template #emptyState>
+    <div class="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+      <p class="text-slate-500 font-medium">Упс! По вашему запросу ничего не найдено</p>
+    </div>
+  </ng-template>
+</div>
