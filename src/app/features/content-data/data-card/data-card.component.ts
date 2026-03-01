@@ -36,4 +36,13 @@ export class BookCardComponent {
     this.dialogContainer.clear();
     this.dialogComponentRef.destroy();
   }
+
+  getBriefInfo(info: string){
+    const posDot = info.indexOf('.');
+    let briefInfo = info;
+    if(posDot !== -1){
+      briefInfo = info.slice(0, posDot) + '...';
+    }
+    return briefInfo;
+  }
 }
