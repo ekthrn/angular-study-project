@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgFor, NgIf} from '@angular/common';
+import {NgFor, NgTemplateOutlet} from '@angular/common';
 
 import {MenuFilterService} from "@services/menu-filter.service";
 
@@ -12,7 +12,7 @@ import {MOCK_BOOKS} from "@mock-data/books.mock";
   selector: 'app-data-list',
   imports: [
     NgFor,
-    NgIf,
+    NgTemplateOutlet,
     SettingPanelComponent,
     BookCardComponent
   ],
