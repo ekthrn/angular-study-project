@@ -1,6 +1,6 @@
 import {Component, Input, ViewChild,
         ViewContainerRef, ComponentRef} from '@angular/core';
-import {NgIf} from '@angular/common';
+import {NgIf, NgTemplateOutlet} from '@angular/common';
 
 import {BookDetailsDialogComponent} from '@features/content-data/book-details-dialog/book-details-dialog.component';
 
@@ -9,7 +9,8 @@ import {Book} from "@models/book.model";
 @Component({
   selector: 'app-data-card',
   imports: [
-    NgIf
+    NgIf,
+    NgTemplateOutlet
   ],
   templateUrl: './data-card.component.html',
   styleUrl: './data-card.component.scss'
