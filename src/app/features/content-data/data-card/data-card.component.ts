@@ -5,6 +5,7 @@ import {NgIf, NgTemplateOutlet} from '@angular/common';
 import {BookDetailsDialogComponent} from '@features/content-data/book-details-dialog/book-details-dialog.component';
 
 import {IfHighRatingDirective} from "@directives/if-high-rating.directive";
+import {HoverOnCardDirective} from "@directives/hover-on-card.directive";
 import {Book} from "@models/book.model";
 
 @Component({
@@ -12,7 +13,7 @@ import {Book} from "@models/book.model";
   imports: [
     NgIf,
     NgTemplateOutlet,
-    IfHighRatingDirective
+    IfHighRatingDirective, HoverOnCardDirective
   ],
   templateUrl: './data-card.component.html',
   styleUrl: './data-card.component.scss'

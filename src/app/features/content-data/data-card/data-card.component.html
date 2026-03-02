@@ -5,10 +5,11 @@
 <ng-template #bookCard>
   <div *ngIf="book as b"
        role="button"
-       class="flex flex-row h-80 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-200 overflow-hidden"
+       class="card flex flex-row bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"
+       appHoverOnCard
        (click)="createDialogComponent(b)">
 
-    <div class="relative w-32 sm:w-90 bg-slate-100 flex items-center justify-center shrink-0 border-r border-slate-100">
+    <div class="img-card relative w-74 h-64 bg-slate-100 flex shrink-0 border-r border-slate-100">
       <img *ngIf="b.coverUrl; else noImg"
            [src]="b.coverUrl"
            [alt]="b.title"
@@ -26,14 +27,12 @@
     </div>
 
     <div class="p-4 flex flex-col flex-grow min-w-0">
-      <div class="text-2xl font-bold text-slate-700 truncate mb-1 leading-tight hover:text-rose-800" [title]="b.title">
-        {{b.title}}
-      </div>
+      <p class="text-2xl font-bold text-slate-700 truncate mb-1 leading-tight" [title]="b.title">{{b.title}}</p>
       <p class="font-medium text-s text-slate-600 mb-3 truncate">{{b.author}}</p>
       <div class="space-y-1 mt-2">
-        <p class="text-sm text-slate-600"><span class="font-bold text-slate-600">Жанр:</span> {{b.genre}}</p>
-        <p class="text-sm text-slate-600"><span class="font-bold text-slate-600">Год издания:</span> {{b.year}}</p>
-        <p class="text-sm text-slate-600 text-justify"><span class="font-bold text-slate-600">Краткое описание:</span> {{getBriefInfo(b.info)}}</p>
+        <p class="text-sm text-slate-600"><span class="font-bold">Жанр:</span> {{b.genre}}</p>
+        <p class="text-sm text-slate-600"><span class="font-bold">Год издания:</span> {{b.year}}</p>
+        <p class="text-sm text-slate-600 text-justify"><span class="title font-bold">Краткое описание:</span> {{getBriefInfo(b.info)}}</p>
       </div>
     </div>
   </div>
