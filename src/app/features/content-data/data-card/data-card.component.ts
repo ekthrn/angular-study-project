@@ -6,14 +6,14 @@ import {BookDetailsDialogComponent} from '@features/content-data/book-details-di
 
 import {IfHighRatingDirective} from "@directives/if-high-rating.directive";
 import {HoverOnCardDirective} from "@directives/hover-on-card.directive";
+import {SelectedCardDirective} from "@directives/selected-card.directive";
 import {Book} from "@models/book.model";
 
 @Component({
   selector: 'app-data-card',
   imports: [
-    NgIf,
-    NgTemplateOutlet,
-    IfHighRatingDirective, HoverOnCardDirective
+    NgIf, NgTemplateOutlet,
+    IfHighRatingDirective, HoverOnCardDirective, SelectedCardDirective
   ],
   templateUrl: './data-card.component.html',
   styleUrl: './data-card.component.scss'

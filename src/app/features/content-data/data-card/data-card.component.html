@@ -2,12 +2,15 @@
   *ngTemplateOutlet="book ? bookCard : emptyState">
 </ng-container>
 
+<!--(click)="createDialogComponent(b)"-->
 <ng-template #bookCard>
   <div *ngIf="book as b"
        role="button"
        class="card flex flex-row bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"
        appHoverOnCard
-       (click)="createDialogComponent(b)">
+       appSelectedCard
+
+  >
 
     <div class="img-card relative w-74 h-64 bg-slate-100 flex shrink-0 border-r border-slate-100">
       <img *ngIf="b.coverUrl; else noImg"
