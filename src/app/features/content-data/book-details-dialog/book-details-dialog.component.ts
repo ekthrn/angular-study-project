@@ -1,5 +1,7 @@
 import { Component, Input, Output,
-        EventEmitter} from '@angular/core';
+        EventEmitter,
+        HostListener
+} from '@angular/core';
 
 import {Book} from "@models/book.model";
 
@@ -12,6 +14,11 @@ import {Book} from "@models/book.model";
 export class BookDetailsDialogComponent {
   @Input() book?: Book;
   @Output() closeEvent = new EventEmitter<boolean>();
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEscapeKey(event: KeyboardEvent) {
+    this.deleteEvent();
+  }
 
   deleteEvent(){
     this.closeEvent.emit(true);
