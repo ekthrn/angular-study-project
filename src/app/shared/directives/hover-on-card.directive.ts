@@ -5,23 +5,31 @@ import {
   HostListener
 } from '@angular/core';
 
+import {FilterService} from "@services/filter.service";
+
 @Directive({
   selector: '[appHoverOnCard]'
 })
 export class HoverOnCardDirective {
   constructor(
     private element: ElementRef,
-    private renderer2: Renderer2
+    private renderer2: Renderer2,
+
+    private filterService: FilterService
   ) {
     this.renderer2.setStyle(this.element.nativeElement, "cursor", "pointer");
   }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.hoverStyles(true);
+    let state: boolean = true;
+    this.hoverStyles(state);
+    this.filterService.setHoverItem(this.element.nativeElement, state);
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.hoverStyles(false);
+    let state: boolean = false;
+    this.hoverStyles(state);
+    this.filterService.setHoverItem(this.element.nativeElement, state);
   }
 
   private hoverStyles(isHover: boolean) {
