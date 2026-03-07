@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
+
+import {FilterService} from "@services/filter.service";
 
 @Component({
   selector: 'app-menu-item',
@@ -10,7 +12,11 @@ export class MenuItemComponent {
   @Input() name: string = '';
   @Input() typeMenu: string = '';
 
-  public alertMessage(item: string, typeMenu:string){
-    alert(`Вы кликнули на ${item} в ${typeMenu}`)
+  constructor(
+      private filterService: FilterService
+  ) {}
+
+  public send(item: string) {
+    this.filterService.setMenu(item);
   }
 }
