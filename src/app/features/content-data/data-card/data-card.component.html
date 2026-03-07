@@ -7,7 +7,7 @@
        role="button"
        class="card flex flex-row bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"
        appHoverOnCard
-       appSelectedCard
+       [appSelectedCard]="b"
        (dblclick)="createDialogComponent(b)">
 
     <div class="img-card relative w-74 h-64 bg-slate-100 flex shrink-0 border-r border-slate-100">
