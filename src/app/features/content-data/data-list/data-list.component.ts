@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  OnInit, OnDestroy
+} from '@angular/core';
 import {NgFor, NgTemplateOutlet} from '@angular/common';
+import {Subject, takeUntil} from 'rxjs';
 
-import {MenuFilterService} from "@services/menu-filter.service";
+import {FilterService} from "@services/filter.service";
 
 import {SettingPanelComponent} from '@features/content-data/setting-panel/setting-panel.component';
 import {BookCardComponent} from '@features/content-data/data-card/data-card.component';
 import {Book} from "@models/book.model";
-import {MOCK_BOOKS} from "@mock-data/books.mock";
 
 @Component({
   selector: 'app-data-list',
@@ -19,39 +22,31 @@ import {MOCK_BOOKS} from "@mock-data/books.mock";
   templateUrl: './data-list.component.html',
   styleUrl: './data-list.component.scss'
 })
-export class BooksListComponent implements OnInit {
+export class BooksListComponent implements OnInit, OnDestroy{
+  private destroy$: Subject<void> = new Subject<void>();
+
   public books: Book[] = [];
 
   constructor(
-    private filterService: MenuFilterService
+    private filterService: FilterService
   ) {}
 
   ngOnInit() {
-    this.filterService.menuItem$.subscribe(genre => {
-      this.books = (genre === null) ? MOCK_BOOKS : MOCK_BOOKS.filter(el => !!el && el.genre.includes(genre));
-    });
+    this.filterService.filteredData$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(filteredBooks => {
+        this.books = filteredBooks;
+      });
 
-    this.filterService.sortOption$.subscribe(option => {
-      if(option){
-        switch(option.id){
-          case 'name':
-            const bookField = 'title' as keyof Book;
-            const isAsc = option.direction === 'asc';
-
-            this.books = [...this.books].sort((a: Book, b: Book) => {
-              if (!a || !b) return 0;
-
-              const titleA = a.title;
-              const titleB = b.title;
-
-              return isAsc ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
-            });
-            break;
-        }
-      } else {
-        this.books = MOCK_BOOKS;
-      }
-    });
+    this.filterService.myState$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(myState$ => {
+        console.log(myState$);
+      });
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public trackByCard(index: number, item: Book): number {
