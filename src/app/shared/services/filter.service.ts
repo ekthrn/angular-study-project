@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 import {Book, FilterState, OptionSort} from '@models';
 import {MOCK_BOOKS} from "@mock-data/books.mock";
@@ -18,22 +18,20 @@ export class FilterService {
     curHoverBook: null,
   });
 
-  readonly myState$: Observable<FilterState> = this.state.pipe();
+  private optionMenu$: Observable<string | null> = this.state.pipe(map(s => s.optionMenu));
+  private optionSort$: Observable<OptionSort | null>  = this.state.pipe(map(s => s.optionSort));
 
-  readonly optionsData$: Observable<OptionSort[]> = this.state.pipe(
-    map(() => {
-      let optionsData: OptionSort[] = this.options;
-      return optionsData;
-    })
-  );
+  readonly myState$: Observable<FilterState> = this.state.asObservable();
+  readonly optionsData$: Observable<OptionSort[]> = new BehaviorSubject(this.options).asObservable();
+  readonly filteredData$: Observable<Book[]> = combineLatest([
+    this.optionMenu$,
+    this.optionSort$
+  ]).pipe(
+    map(([menu, sort]) => {
+      let filteredData = [...this.data];
 
-  readonly filteredData$: Observable<Book[]> = this.state.pipe(
-    map(state => {
-      let filteredData: Book[] = this.data;
-
-      if(state.optionMenu) filteredData = this.updateDataMenu(state.optionMenu, filteredData);
-
-      if(state.optionSort) filteredData = this.updateDataSort(state.optionSort, filteredData);
+      if (menu) filteredData = this.updateDataMenu(menu, filteredData);
+      if (sort) filteredData = this.updateDataSort(sort, filteredData);
 
       return filteredData;
     })
