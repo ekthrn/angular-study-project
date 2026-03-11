@@ -13,19 +13,14 @@
       <span class="material-symbols-outlined">expand_more</span>
     </div>
   </div>
-  <div *ngIf="!isHide" class="mt-6 flex flex-col sm:flex-row sm:items-center gap-6 border-t border-slate-100 pt-4">
-    <div class="flex items-center gap-4">
-      <span class="text-xs font-medium text-rose-900/90 whitespace-nowrap">Сортировать по:</span>
-      <div class="flex gap-2">
-        <button
-          *ngFor="let option of options"
-          type="button"
-          (click)="setFilter(option.id)"
-          [class]="currentOption === option.id ? 'bg-rose-100 text-rose-700 border-rose-200' : 'bg-slate-50 text-slate-600 border-transparent'"
-          class="px-4 py-2 text-xs font-bold rounded-xl transition-all border hover:bg-rose-50 hover:text-rose-700 active:scale-95">
-          {{ option.label }}
-        </button>
-      </div>
-    </div>
-  </div>
+
+  @if (!isHide) {
+    <ng-container>
+      <app-filter-sort></app-filter-sort>
+    </ng-container>
+
+    <ng-container>
+      <app-filter-search></app-filter-search>
+    </ng-container>
+  }
 </aside>
