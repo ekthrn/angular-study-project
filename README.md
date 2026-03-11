@@ -1,8 +1,7 @@
   
-# Домашка №2
+# Домашка №5
 
-Созданы 4 компоненты (left-menu, header, main-content-panel, menu-item):
-![](./public/main-page.png)
+2. Добавлен поиск по книгам (компонента filter-search)
+   ![](./public/search.png)
 
-При нажатии на кнопки(menu-item) из left-menu или header появляется alert:
-![](./public/alert.png)
+

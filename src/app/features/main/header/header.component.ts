@@ -6,8 +6,8 @@ import { MenuItemComponent } from '@components/menu-item/menu-item.component';
 @Component({
   selector: 'app-header',
   imports: [
+    NgFor,
     MenuItemComponent,
-    NgFor
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

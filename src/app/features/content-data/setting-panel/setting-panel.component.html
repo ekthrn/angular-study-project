@@ -1,0 +1,26 @@
+<aside class="bg-white mb-6 p-5 rounded-2xl border border-slate-100 shadow-xs transition-all duration-300 w-full overflow-hidden">
+  <div class="flex items-center gap-3 cursor-pointer group select-none" (click)="isHide = !isHide">
+    <div class="flex items-center justify-center w-8 h-8 rounded-lg text-rose-700 transition-colors">
+      <span class="material-symbols-outlined text-[20px]">
+        {{ isHide ? 'tune' : 'close' }}
+      </span>
+    </div>
+    <h3 class="font-mono text-xs tracking-widest text-slate-500 uppercase transition-colors group-hover:text-rose-800">
+      Настройки и фильтры
+    </h3>
+    <div class="ml-auto text-slate-300 flex items-center transition-transform duration-300 group-hover:text-rose-800"
+         [class.rotate-180]="!isHide">
+      <span class="material-symbols-outlined">expand_more</span>
+    </div>
+  </div>
+
+  @if (!isHide) {
+    <ng-container>
+      <app-filter-sort></app-filter-sort>
+    </ng-container>
+
+    <ng-container>
+      <app-filter-search></app-filter-search>
+    </ng-container>
+  }
+</aside>

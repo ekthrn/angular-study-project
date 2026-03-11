@@ -1,15 +1,24 @@
-<aside class="flex flex-col w-64 h-screen border-r border-gray-200 bg-white">
-  <div class="flex h-16 items-center px-6">
-    <span class="text-xl font-bold text-gray-800">{{ typeMenu }}</span>
-  </div>
-  <nav class="flex-1 overflow-y-auto">
-    <ul role="list"
-        class="px-4 py-1"
-        *ngFor="let item of menuItems"
-    >
-      <li>
-        <app-menu-item [name]="item" [typeMenu]="typeMenu"></app-menu-item>
-      </li>
-    </ul>
-  </nav>
+<aside class="w-48 bg-white m-4 p-6 transition-all duration-300">
+    <div class="flex items-center justify-between cursor-pointer group mb-4"
+         (click)="isHide = !isHide">
+        <p class="font-mono text-xs font-medium tracking-widest text-rose-900 uppercase">
+            {{ typeMenu }}
+        </p>
+        <div class="flex items-center transition-transform duration-300 w-5 h-5 text-rose-900"
+             [class.rotate-180]="!isHide">
+            <span class="material-symbols-outlined text-[18px]">expand_more</span>
+        </div>
+    </div>
+    <nav class="overflow-hidden transition-all" [hidden]="isHide">
+        <ul role="list" class="flex flex-col border-l border-gray-100 ml-0.5">
+            <li *ngFor="let item of menuItems; trackBy: trackByMenu" class="-ml-px">
+                <app-menu-item
+                        [name]="item"
+                        [typeMenu]="typeMenu"
+                        class="block border-l border-transparent pl-2 py-0.2 text-sm text-gray-600
+                           hover:border-rose-600 hover:text-rose-800 transition-all duration-200">
+                </app-menu-item>
+            </li>
+        </ul>
+    </nav>
 </aside>
