@@ -1,63 +1,88 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable,
+  combineLatest, map, debounceTime, distinctUntilChanged} from 'rxjs';
 
-import {Book, FilterState, OptionSort} from '@models';
+import {Book, FilterState, OptionSort, OptionSearch} from '@models';
 import {MOCK_BOOKS} from "@mock-data/books.mock";
-import {MOCK_PANEL_OPTIONS} from "@mock-data/options-panel.mock";
+import {MOCK_SORT_OPTIONS} from "@mock-data/sort-options.mock";
+import {MOCK_SEARCH_OPTIONS} from "@mock-data/search-options.mock";
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilterService {
   private readonly data: Book[] = MOCK_BOOKS;
-  private readonly options: OptionSort[] = MOCK_PANEL_OPTIONS;
+  private readonly optionsSort: OptionSort[] = MOCK_SORT_OPTIONS;
+  private readonly optionsSearch: OptionSearch[] = MOCK_SEARCH_OPTIONS;
   private state = new BehaviorSubject<FilterState>({
     optionMenu: null,
     optionSort: null,
+    optionSearch: null,
     featuredItems: [],
     curHoverBook: null,
+    query: ''
   });
 
   private optionMenu$: Observable<string | null> = this.state.pipe(map(s => s.optionMenu));
   private optionSort$: Observable<OptionSort | null>  = this.state.pipe(map(s => s.optionSort));
+  private optionSearch$: Observable<OptionSearch | null>  = this.state.pipe(map(s => s.optionSearch));
+  private querySearch$: Observable<string | null> = this.state.pipe(
+    map(s => s.query || ''),
+    debounceTime(300),
+    distinctUntilChanged(),
+  );
 
   readonly myState$: Observable<FilterState> = this.state.asObservable();
-  readonly optionsData$: Observable<OptionSort[]> = new BehaviorSubject(this.options).asObservable();
+  readonly optionsSortData$: Observable<OptionSort[]> = new BehaviorSubject(this.optionsSort).asObservable();
+  readonly optionsSearchData$: Observable<OptionSearch[]> = new BehaviorSubject(this.optionsSearch).asObservable();
+
   readonly filteredData$: Observable<Book[]> = combineLatest([
     this.optionMenu$,
-    this.optionSort$
+    this.optionSort$,
+    this.optionSearch$,
+    this.querySearch$
   ]).pipe(
-    map(([menu, sort]) => {
+    map(([menu, sort, search, query]) => {
       let filteredData = [...this.data];
 
       if (menu) filteredData = this.updateDataMenu(menu, filteredData);
       if (sort) filteredData = this.updateDataSort(sort, filteredData);
+      if (search && query) filteredData = this.updateDataSearch(search, query, filteredData);
 
       return filteredData;
     })
   );
 
   private updateDataMenu(item: string, curData: Book[]): Book[]  {
-    let resData = curData.filter(el => !!el && el.genre.includes(item));
+    const resData = curData.filter(el => !!el && el.genre.includes(item));
     return resData;
   }
   private updateDataSort(item: OptionSort, curData: Book[]): Book[] {
-    let resData = curData;
-    switch(item.id){
-      case 'name':
-        const isAsc = item.direction === 'asc';
+    const isAsc = item.direction === 'asc';
 
-        resData = [...curData].sort((a: Book, b: Book) => {
-          if (!a || !b) return 0;
+    return [...curData].sort((a: Book, b: Book) => {
+      if (!a || !b) return 0;
 
-          const titleA = a.title;
-          const titleB = b.title;
+      const key = item.id as keyof Book;
 
-          return isAsc ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
-        });
-        break;
-    }
-    return resData;
+      const titleA = a[key] as string;
+      const titleB = b[key] as string;
+
+      return isAsc ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
+    });
+  }
+  private updateDataSearch(item: OptionSearch, query: string, curData: Book[]): Book[] {
+    const lQuery = query.toLowerCase().trim();
+    if (!lQuery) return curData;
+
+    return curData.filter(el => {
+      if (!el) return false;
+
+      const key = item.id as keyof Book;
+      const resElement = el[key] as string;
+
+      return resElement.includes(lQuery);
+    });
   }
 
   public setMenu(item: string | null) {
@@ -83,5 +108,11 @@ export class FilterService {
     if(state) currentBook = book;
 
     this.state.next({ ...this.state.value, curHoverBook: currentBook });
+  }
+  public setSearchParam(param: OptionSearch) {
+    this.state.next({ ...this.state.value, optionSearch: param });
+  }
+  public setQuery(query: string) {
+    this.state.next({ ...this.state.value, query: query });
   }
 }
