@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 
-import {MenuFilterService} from "@services/menu-filter.service";
+import {FilterService} from "@services/filter.service";
 
 @Component({
   selector: 'app-menu-item',
@@ -13,10 +13,10 @@ export class MenuItemComponent {
   @Input() typeMenu: string = '';
 
   constructor(
-      private filterService: MenuFilterService
+      private filterService: FilterService
   ) {}
 
   public send(item: string) {
-    this.filterService.setMenuItem(item);
+    this.filterService.setMenu(item);
   }
 }

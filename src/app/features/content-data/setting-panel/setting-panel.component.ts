@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit, OnDestroy
+} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 
 import {OptionSort} from '@models/option.model';
-import {MenuFilterService} from '@services/menu-filter.service';
+import {FilterService} from '@services/filter.service';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-setting-panel',
@@ -10,17 +14,28 @@ import {MenuFilterService} from '@services/menu-filter.service';
   templateUrl: './setting-panel.component.html',
   styleUrl: './setting-panel.component.scss'
 })
-export class SettingPanelComponent {
+export class SettingPanelComponent implements OnInit, OnDestroy{
+  private destroy$: Subject<void> = new Subject<void>();
+
   public isHide: boolean = true;
-  public options: OptionSort[] = [
-    { id: 'name', label: 'Наименованию', direction: 'asc'},
-    // { id: 'rating', label: 'Рейтингу', direction: 'asc'}
-  ];
+  public options: OptionSort[] = [];
   public currentOption: string = 'name';
 
   constructor(
-    private filterService: MenuFilterService
+    private filterService: FilterService
   ) {}
+
+  ngOnInit() {
+    this.filterService.optionsData$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(optionsData => {
+        this.options = optionsData;
+      });
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   public setFilter(id: string) {
     let myOption = this.options.find(el => !!el && el.id === id);
@@ -34,6 +49,6 @@ export class SettingPanelComponent {
       myOption.direction = 'asc';
     }
 
-    this.filterService.setSortOption(myOption);
+    this.filterService.setSort(myOption);
   }
 }

@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.card.selected::after {
+  font-family: 'Material Icons Outlined';
+  content: '\e87d';
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  //background: oklch(71.2% 0.194 13.428);
+  color: oklch(45.5% 0.188 13.697);
+
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 10;
+
+  user-select: none;
+  pointer-events: none;
+}
+
