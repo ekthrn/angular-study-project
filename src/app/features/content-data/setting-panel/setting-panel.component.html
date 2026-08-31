@@ -1,0 +1,31 @@
+<aside class="bg-white mb-6 p-5 rounded-2xl border border-slate-100 shadow-xs transition-all duration-300 w-full overflow-hidden">
+  <div class="flex items-center gap-3 cursor-pointer group select-none" (click)="isHide = !isHide">
+    <div class="flex items-center justify-center w-8 h-8 rounded-lg text-rose-700 transition-colors">
+      <span class="material-symbols-outlined text-[20px]">
+        {{ isHide ? 'tune' : 'close' }}
+      </span>
+    </div>
+    <h3 class="font-mono text-xs tracking-widest text-slate-500 uppercase transition-colors group-hover:text-rose-800">
+      Настройки и фильтры
+    </h3>
+    <div class="ml-auto text-slate-300 flex items-center transition-transform duration-300 group-hover:text-rose-800"
+         [class.rotate-180]="!isHide">
+      <span class="material-symbols-outlined">expand_more</span>
+    </div>
+  </div>
+  <div *ngIf="!isHide" class="mt-6 flex flex-col sm:flex-row sm:items-center gap-6 border-t border-slate-100 pt-4">
+    <div class="flex items-center gap-4">
+      <span class="text-xs font-medium text-rose-900/90 whitespace-nowrap">Сортировать по:</span>
+      <div class="flex gap-2">
+        <button
+          *ngFor="let option of options"
+          type="button"
+          (click)="setFilter(option.id)"
+          [class]="currentOption === option.id ? 'bg-rose-100 text-rose-700 border-rose-200' : 'bg-slate-50 text-slate-600 border-transparent'"
+          class="px-4 py-2 text-xs font-bold rounded-xl transition-all border hover:bg-rose-50 hover:text-rose-700 active:scale-95">
+          {{ option.label }}
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
