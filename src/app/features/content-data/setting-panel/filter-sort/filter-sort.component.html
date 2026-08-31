@@ -1,0 +1,16 @@
+<div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-6 border-t border-slate-100 pt-4">
+  <div class="flex items-center gap-4">
+    <span class="text-xs font-medium text-rose-900/90 whitespace-nowrap">Сортировать по:</span>
+    <div class="flex gap-2">
+      @for (option of options; track option.id) {
+        <button
+          type="button"
+          (click)="setFilter(option)"
+          [class]="option.isSelected ? 'bg-rose-100 text-rose-700 border-rose-200' : 'bg-slate-50 text-slate-600 border-transparent'"
+          class="px-4 py-2 text-xs font-bold rounded-xl transition-all border hover:bg-rose-50 hover:text-rose-700 active:scale-95">
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

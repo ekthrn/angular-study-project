@@ -40,8 +40,8 @@ export class BooksListComponent implements OnInit, OnDestroy{
 
     this.filterService.myState$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(myState$ => {
-        console.log(myState$);
+      .subscribe(myState => {
+        console.log(myState);
       });
   }
   ngOnDestroy() {
